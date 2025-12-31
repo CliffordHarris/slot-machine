@@ -26,6 +26,7 @@ export default function SlotMachine() {
     const [losses, setLosses] = useState<number>(0)
     const [confetti, setConfetti] = useState<Array<{ id: number; left: number; color: string; delay: number }>>([])
     const [simulating, setSimulating] = useState<boolean>(false)
+    const [isMobile, setIsMobile] = useState<boolean>(false)
     const simulatingRef = useRef<boolean>(false)
 
     const spinIntervals = useRef<NodeJS.Timeout[]>([])
@@ -50,6 +51,16 @@ export default function SlotMachine() {
         window.addEventListener('keydown', handleKeyPress)
         return () => window.removeEventListener('keydown', handleKeyPress)
     }, [spinning, stopping])
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+        }
+
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
 
     const startSpin = () => {
         setSpinning(true)
@@ -448,7 +459,7 @@ export default function SlotMachine() {
                         }}
                     >
                         <span className="relative z-10">
-                            {stopping ? 'STOPPING...' : spinning ? 'STOP (SPACE)' : 'SPIN (SPACE)'}
+                            {stopping ? 'STOPPING...' : spinning ? (isMobile ? 'STOP' : 'STOP (SPACE)') : (isMobile ? 'SPIN' : 'SPIN (SPACE)')}
                         </span>
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                     </Button>
@@ -468,7 +479,7 @@ export default function SlotMachine() {
                     </div>
 
                     <div className="mt-4 text-sm text-muted-foreground">
-                        <p>🎰 Press SPACEBAR or click button to spin • Press SPACEBAR again to stop</p>
+                        <p>🎰 {isMobile ? 'Tap button to spin • Tap again to stop' : 'Press SPACEBAR or click button to spin • Press SPACEBAR again to stop'}</p>
                     </div>
                 </div>
             </Card>
