@@ -323,7 +323,13 @@ export default function SlotMachine() {
 
             <Card className="p-8 md:p-12 border-2 border-primary/30 bg-card/80 backdrop-blur-sm shadow-[0_0_50px_rgba(0,0,0,0.5)]">
                 <div className="text-center mb-8">
-                    <h1 className="text-4xl md:text-6xl font-bold neon-text text-primary mb-2">
+                    <h1
+                        className="text-4xl md:text-6xl font-bold mb-2"
+                        style={{
+                            color: 'oklch(0.75 0.25 200)',
+                            textShadow: '0 0 20px oklch(0.75 0.25 200), 0 0 40px oklch(0.75 0.25 200), 0 0 60px oklch(0.75 0.25 200)'
+                        }}
+                    >
                         SLOT MACHINE
                     </h1>
                 </div>
