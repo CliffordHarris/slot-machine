@@ -483,6 +483,13 @@ export default function SlotMachine() {
                     </div>
                 </div>
             </Card>
+
+            {/* Win Rate Display */}
+            <div className="mt-6 text-center">
+                <p className="text-white text-xl font-medium">
+                    Win Rate: {wins + losses > 0 ? ((wins / (wins + losses)) * 100).toFixed(2) : '0.00'}%
+                </p>
+            </div>
         </div>
     )
 }
