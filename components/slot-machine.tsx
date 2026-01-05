@@ -478,6 +478,10 @@ export default function SlotMachine() {
                         </div>
                     </div>
 
+                    <div className="mt-3 text-white font-mono text-lg">
+                        Win Rate: {wins + losses > 0 ? ((wins / (wins + losses)) * 100).toFixed(2) : '0.00'}%
+                    </div>
+
                     <div className="mt-4 text-sm text-muted-foreground">
                         <p>🎰 {isMobile ? 'Tap button to spin • Tap again to stop' : 'Press SPACEBAR or click button to spin • Press SPACEBAR again to stop'}</p>
                     </div>
